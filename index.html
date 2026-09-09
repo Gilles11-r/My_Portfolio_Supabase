@@ -7,7 +7,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/all.min.css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <script src="https://unpkg.com/typed.js@3.0.0/dist/typed.umd.js"></script>
-    <link rel="stylesheet" href="portfolio.css" />
+    <link rel="stylesheet" href="style.css">
+    <script type="module">
+        import{ createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+        window.supabase = createClient(
+            "https://Portfolio.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhmdHl5aXpqeHlpdGp2bG9uanZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4NjU3NDEsImV4cCI6MjEwNDQ0MTc0MX0._oRx44KBleYzqLqoBklMDflBpW8CLtwmjnrhKCRl1SM"
+        );
+    </script>
+    
 </head>
 <body>
 
@@ -255,12 +263,13 @@
         </div>
 
         <div class="contact-form">
-            <form action="">
-                <input type="text" placeholder="Your Name" class="box" required>
-                <input type="email" placeholder="Your Email" class="box" required>
-                <input type="text" placeholder="Your Subject" class="box" required>
-                <textarea name="" id="" cols="30" rows="10" placeholder="Your Message" required></textarea>
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Your Name" class="box" required>
+                <input type="email" id="email" placeholder="Your Email" class="box" required>
+                <input type="text" id="subject" placeholder="Your Subject" class="box" required>
+                <textarea name="" id="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
                 <input type="submit" value="Send Message" class="send">
+                <p id="formStatus" style="margin-top: 15px; font-size: 14px; color: #000;"></p>
             </form>
         </div>
 
