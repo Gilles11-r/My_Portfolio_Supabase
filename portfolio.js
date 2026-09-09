@@ -89,3 +89,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         menuIcon.classList.remove('bx-x');
     });
 });
+
+// Envoi du formulaire de contact vers Supabase
+const contactForm = document.querySelector('#contactForm');
+const formStatus = document.querySelector('#formStatus');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const name = document.querySelector('#name').value.trim();
+        const email = document.querySelector('#email').value.trim();
+        const subject = document.querySelector('#subject').value.trim();
+        const message = document.querySelector('#message').value.trim();
+
+        formStatus.textContent = "Envoi en cours...";
+        formStatus.style.color = "#0ef";
+
+        const { error } = await window.supabaseClient
+            .from('Messages')          // nom exact de la table (majuscule)
+            .insert([{
+                Name: name,             // noms exacts des colonnes (majuscules)
+                Email: email,
+                Subject: subject,
+                Message: message
+            }]);
+
+        if (error) {
+            console.error(error);
+            formStatus.textContent = "Une erreur est survenue. Réessaie plus tard.";
+            formStatus.style.color = "#ff004f";
+        } else {
+            formStatus.textContent = "Message envoyé avec succès, merci !";
+            formStatus.style.color = "#0ef";
+            contactForm.reset();
+        }
+    });
+}
